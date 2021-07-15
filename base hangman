@@ -1,0 +1,42 @@
+#This is the base code of hangman
+
+import random
+import string
+flower_list = ["tulip","rose","orchid","lily","lotus","Hyacinth","sunflower","daisy"]
+
+def getWord(flower_list):
+    chosen_word = random.choice(flower_list) #randomly choses something from a list
+    return chosen_word.upper()
+
+def hangman():
+    word = getWord(flower_list)
+    letter_store = set(word)
+    alphabet = set(string.ascii_uppercase)
+    guessed_letter = set()
+
+    
+
+    while len(letter_store) > 0:
+        print('You have used these letters: ', ' '.join(guessed_letter))
+
+        word_list = [letter if letter in guessed_letter else '-' for letter in word]
+        print('Current word is: ', ' '.join(word_list))
+
+        user_letter = input ("guess letter here: ").upper()
+        if user_letter in alphabet not in guessed_letter:
+            guessed_letter.add(user_letter)
+            if user_letter in letter_store:
+               letter_store.remove(user_letter)
+        elif user_letter in guessed_letter:
+            print("You have already guessed this word.Try again")
+
+        else:
+            print("Invalid")
+
+
+hangman()
+
+
+
+
+
